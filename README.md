@@ -1,6 +1,6 @@
 # Text summarization
-*Trại hè MaSSP 2018*\\
-*Môn Khoa học máy tính*
+*Trại hè MaSSP 2018*<br />
+*Môn Khoa học máy tính*<br />
 ##Nhóm tác giả
 * Nguyễn Đình Hoàng Phúc
 * Nguyễn Mai Kiều Anh
