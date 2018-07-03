@@ -15,7 +15,7 @@ Mô hình Text Summarization sẽ mang lại nhiều lợi ích như:
 * Tiết kiệm thời gian đọc văn bản
 * Giúp cho việc lưu trữ, định hướng các văn bản trở nên có hệ thống
 * Tiết kiệm thời gian cho quá trình chọn lọc, tìm kiếm văn bản
-## ng dụng thực tế của dự án
+## Ứng dụng thực tế của dự án
 * **Tóm tắt tin tức**: ví dụ:
 *The Defense Intelligence Agency believes that North Korean leader Kim Jong Un has no intention of engaging in a full denuclearization
 program, at least for now, according to an administration official familiar with the agency's finding.*
