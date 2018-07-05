@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "text_summarizer/styles/loader.css" %}">
     <style>
       #main-content {
         padding: 10px;
@@ -18,7 +20,7 @@
   </head>
 
   {% load static %}
-  <body background="{% static "text_summarizer/images/background_image.jpg" %}">
+  <body background="{% static "text_summarizer/images/background_image.jpg" %}" style="background-size: cover;">
     <div id="header">
       <div class="container text-center">
           <h1>Welcome to Text Summarization!</h1>
@@ -26,9 +28,11 @@
     </div>
 
     <div id="main-content" class="row">
-      <div class="col-md-6">
+      <div class="col-md-12 text-center">
         <p>This is a text summarization application. Given a paragraph, the
           application will automatically generate a summary of the paragraph.</p>
+      </div>
+      <div class="col-md-6">
         </br>
         <span>Enter text or </span>
         <select id="example-paragraph-select" data-style="btn-primary">
@@ -44,10 +48,23 @@
           <textarea maxlength="1000" class="form-control" id="paragraphTextArea" rows="5" placeholder="Input a paragraph ..."></textarea>
           <small><label id="characterCountLabel" for="paragraphTextArea">Number of characters left: 1000</label></small>
         </div>
-        <button type="button" id="run-model-button" class="btn btn-primary pull-right">Generate Summary</button>
+        <button type="button" id="run-model-button" class="btn btn-primary pull-right" onClick="onRunModelButtonClicked()">Generate Summary</button>
       </form>
       </div>
       <div class="col-md-6">
+        <div id="loader" class="d-none">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="lading"></div>
+        </div>
+        <div id="result_summary" class="d-none" style="color:white">
+        </div>
       </div>
 
     </div>
@@ -79,6 +96,27 @@
       $('#paragraphTextArea').on("input", function(){
         updateCharacterCountLabel()
       });
+
+      function onRunModelButtonClicked() {
+        var paragraphText = $('#paragraphTextArea').val().trim()
+        if (paragraphText.length > 0) {
+          $('#result_summary').addClass('d-none')
+          $('#result_summary').html('')
+          $("#loader").removeClass('d-none')
+          setTimeout(function () {
+            let selectedParagraphID = $("#example-paragraph-select").val()
+            if (selectedParagraphID == "flower_review") {
+              $('#result_summary').html('<p>Good service. Order arrived on time.</p>')
+            } else if (selectedParagraphID == "chocolate_review") {
+              $('#result_summary').html('<p>Best chocolate ever.</p>')
+            }
+            $("#loader").addClass('d-none')
+            $('#result_summary').removeClass('d-none')
+
+          }, 1500);
+
+        }
+      }
 
     </script>
 
