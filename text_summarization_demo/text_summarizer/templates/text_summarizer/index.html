@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css'>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <style>
+      #main-content {
+        padding: 10px;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="header">
+      <div class="container text-center">
+          <h1>Welcome to Text Summarization!</h1>
+      </div>
+    </div>
+
+    <div id="main-content" class="row">
+      <div class="col-md-6">
+        <p>This is a text summarization application. Given a paragraph, the
+          application will automatically generate a summary of the paragraph.</p>
+        </br>
+        <span>Enter text or </span>
+        <select id="example-paragraph-select" data-style="btn-primary">
+          <option value="none">Choose an example ...</option>
+            <option value="flower_review">Flower Review</option>
+            <option value="chocolate_review">Chocolate Review</option>
+        </select>
+      </br>
+      </br>
+      <form>
+        <div class="form-group">
+          <label for="paragraphTextArea"><b>Paragraph</b></label>
+          <textarea maxlength="1000" class="form-control" id="paragraphTextArea" rows="5" placeholder="Input a paragraph ..."></textarea>
+          <small><label id="characterCountLabel" for="paragraphTextArea">Number of characters left: 1000</label></small>
+        </div>
+        <button type="button" id="run-model-button" class="btn btn-primary pull-right">Generate Summary</button>
+      </form>
+      </div>
+      <div class="col-md-6">
+      </div>
+
+    </div>
+
+    <script>
+      $("#example-paragraph-select").change(function() {
+        let selectedParagraphID = $("#example-paragraph-select").val()
+        if (selectedParagraphID == "none") {
+          $("#paragraphTextArea").val("")
+        } else if (selectedParagraphID == "flower_review") {
+          $("#paragraphTextArea").val("I ordered two of these to send to my grandmother and mother in law for mother's day. It arrived earlier than expected and both of them were pleased with the flowers. The plant arrived with flower buds ready to open and were packed well for delivery. I will order from Giving plants again!")
+        } else if (selectedParagraphID == "chocolate_review") {
+          $("#paragraphTextArea").val("I love chocolate ... These by far are the best I have had on a long time. Best combo of salt and sweet! I will for sure buy these again!!!")
+        }
+        updateCharacterCountLabel()
+      });
+
+      function updateCharacterCountLabel() {
+        var maxlength = $('#paragraphTextArea').attr("maxlength");
+        var currentLength = $('#paragraphTextArea').val().length;
+        if (currentLength >= maxlength ){
+            $("#characterCountLabel").html("You have reached the maximum number of characters.")
+        } else {
+          var nbCharactersLeft = maxlength - currentLength
+          $("#characterCountLabel").html("Number of characters left: " + nbCharactersLeft)
+        }
+      }
+
+      $('#paragraphTextArea').on("input", function(){
+        updateCharacterCountLabel()
+      });
+
+    </script>
+
+  </body>
+
+</html>
